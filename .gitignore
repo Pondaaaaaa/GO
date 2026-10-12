@@ -1,0 +1,14 @@
+# Local Go installation launcher and machine-specific files
+/setup.ps1
+.env
+.env.*
+!.env.example
+
+# Build and test outputs
+*.exe
+/bin/
+/dist/
+coverage.out
+*.prof
+*.pprof
+*.log
