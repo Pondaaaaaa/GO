@@ -6,4 +6,4 @@
 
 Инфраструктура: Windows и PowerShell, Go 1.27.2 в `D:\MAG\GO\.local\go`, Git, VS Code, PostgreSQL 18, Docker Desktop с Compose. GitHub: публичный `https://github.com/Pondaaaaaa/GO`. Реальные секреты и учебные DOCX не публиковать.
 
-Для текущей задачи читай `context/PZ01.md` и `context/REPORTS.md`. Для следующих занятий сначала добавляй короткую страницу `context/PZNN.md`, извлекая точные требования только из соответствующего DOCX.
+Для конкретной практики читай только `context/PZNN.md` и `context/REPORTS.md`; исходный DOCX открывай при неясности. Для ещё не описанных занятий сначала добавляй короткую страницу `context/PZNN.md`, извлекая точные требования из соответствующего DOCX.
