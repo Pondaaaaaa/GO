@@ -1,0 +1,2 @@
+NAME                                         IMAGE                  COMMAND                  SERVICE   CREATED         STATUS                   PORTS
+pz16-a7722b52d5fc40328a5f6d374efcc493-pg-1   postgres:16.6-alpine   "docker-entrypoint.s…"   pg        3 seconds ago   Up 3 seconds (healthy)   127.0.0.1:62596->5432/tcp

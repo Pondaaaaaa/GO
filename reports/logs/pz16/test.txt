@@ -1,0 +1,7 @@
+?   	github.com/Pondaaaaaa/GO/practices/pz16-integration/cmd/api	[no test files]
+ok  	github.com/Pondaaaaaa/GO/practices/pz16-integration/integration	1.813s
+?   	github.com/Pondaaaaaa/GO/practices/pz16-integration/internal/db	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz16-integration/internal/httpapi	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz16-integration/internal/models	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz16-integration/internal/repo	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz16-integration/internal/service	[no test files]

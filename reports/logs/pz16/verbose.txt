@@ -1,0 +1,90 @@
+=== RUN   TestCreateAndGetNote
+    notes_test.go:182: POST /api/v1/notes -> 201 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:17.35828+03:00","updatedAt":"2026-10-13T23:16:17.35828+03:00"}
+    notes_test.go:184: GET /api/v1/notes/1 -> 200 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:17.35828+03:00","updatedAt":"2026-10-13T23:16:17.35828+03:00"}
+    notes_test.go:189: DB INSERT verified: title=Hello content=World count=1
+--- PASS: TestCreateAndGetNote (0.07s)
+=== RUN   TestGetMissingNote
+    notes_test.go:193: GET /api/v1/notes/999999 -> 404 Content-Type="application/json; charset=utf-8" {"error":"note not found"}
+--- PASS: TestGetMissingNote (0.04s)
+=== RUN   TestUpdateNote
+    notes_test.go:200: POST /api/v1/notes -> 201 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:17.456921+03:00","updatedAt":"2026-10-13T23:16:17.456921+03:00"}
+    notes_test.go:202: PATCH /api/v1/notes/1 -> 200 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Changed","content":"World","createdAt":"2026-10-13T23:16:17.456921+03:00","updatedAt":"2026-10-13T23:16:17.460216+03:00"}
+    notes_test.go:208: PATCH /api/v1/notes/1 -> 200 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Changed","content":"","createdAt":"2026-10-13T23:16:17.456921+03:00","updatedAt":"2026-10-13T23:16:17.463571+03:00"}
+    notes_test.go:214: PATCH /api/v1/notes/999999 -> 404 Content-Type="application/json; charset=utf-8" {"error":"note not found"}
+    notes_test.go:219: DB UPDATE verified: partial fields preserved, timestamps advanced, empty content allowed
+--- PASS: TestUpdateNote (0.04s)
+=== RUN   TestDeleteNote
+    notes_test.go:223: POST /api/v1/notes -> 201 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:17.499268+03:00","updatedAt":"2026-10-13T23:16:17.499268+03:00"}
+    notes_test.go:225: DELETE /api/v1/notes/1 -> 204 Content-Type="" 
+    notes_test.go:229: GET /api/v1/notes/1 -> 404 Content-Type="application/json; charset=utf-8" {"error":"note not found"}
+    notes_test.go:230: DELETE /api/v1/notes/1 -> 404 Content-Type="application/json; charset=utf-8" {"error":"note not found"}
+    notes_test.go:231: DB DELETE verified: count=0; 204 has empty body
+--- PASS: TestDeleteNote (0.04s)
+=== RUN   TestListNotes
+    notes_test.go:235: GET /api/v1/notes -> 200 Content-Type="application/json; charset=utf-8" []
+    notes_test.go:239: POST /api/v1/notes -> 201 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:17.538645+03:00","updatedAt":"2026-10-13T23:16:17.538646+03:00"}
+    notes_test.go:240: POST /api/v1/notes -> 201 Content-Type="application/json; charset=utf-8" {"id":2,"title":"Second","content":"Two","createdAt":"2026-10-13T23:16:17.540692+03:00","updatedAt":"2026-10-13T23:16:17.540692+03:00"}
+    notes_test.go:242: GET /api/v1/notes -> 200 Content-Type="application/json; charset=utf-8" [{"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:17.538645+03:00","updatedAt":"2026-10-13T23:16:17.538646+03:00"},{"id":2,"title":"Second","content":"Two","createdAt":"2026-10-13T23:16:17.540692+03:00","updatedAt":"2026-10-13T23:16:17.540692+03:00"}]
+    notes_test.go:252: DB list verified: stable ID order and empty array
+--- PASS: TestListNotes (0.04s)
+=== RUN   TestInvalidRequests
+    notes_test.go:256: POST /api/v1/notes -> 201 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:17.577894+03:00","updatedAt":"2026-10-13T23:16:17.577894+03:00"}
+=== RUN   TestInvalidRequests/malformed
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/blank_title
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/unknown_field
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/trailing_json
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/wrong_content_type
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/fake_json_type
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/null_create
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/bad_id
+    notes_test.go:278: GET /api/v1/notes/abc -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/zero_id
+    notes_test.go:278: GET /api/v1/notes/0 -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/negative_id
+    notes_test.go:278: DELETE /api/v1/notes/-1 -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/overflow_id
+    notes_test.go:278: GET /api/v1/notes/9223372036854775808 -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/empty_patch
+    notes_test.go:278: PATCH /api/v1/notes/1 -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/null_patch
+    notes_test.go:278: PATCH /api/v1/notes/1 -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/blank_patch
+    notes_test.go:278: PATCH /api/v1/notes/1 -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/bad_patch_id
+    notes_test.go:278: PATCH /api/v1/notes/bad -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== RUN   TestInvalidRequests/oversized
+    notes_test.go:278: POST /api/v1/notes -> 400 Content-Type="application/json; charset=utf-8" {"error":"invalid request"}
+=== NAME  TestInvalidRequests
+    notes_test.go:285: DB unchanged after all invalid requests
+--- PASS: TestInvalidRequests (0.58s)
+    --- PASS: TestInvalidRequests/malformed (0.00s)
+    --- PASS: TestInvalidRequests/blank_title (0.00s)
+    --- PASS: TestInvalidRequests/unknown_field (0.00s)
+    --- PASS: TestInvalidRequests/trailing_json (0.00s)
+    --- PASS: TestInvalidRequests/wrong_content_type (0.00s)
+    --- PASS: TestInvalidRequests/fake_json_type (0.00s)
+    --- PASS: TestInvalidRequests/null_create (0.00s)
+    --- PASS: TestInvalidRequests/bad_id (0.00s)
+    --- PASS: TestInvalidRequests/zero_id (0.00s)
+    --- PASS: TestInvalidRequests/negative_id (0.00s)
+    --- PASS: TestInvalidRequests/overflow_id (0.00s)
+    --- PASS: TestInvalidRequests/empty_patch (0.00s)
+    --- PASS: TestInvalidRequests/null_patch (0.00s)
+    --- PASS: TestInvalidRequests/blank_patch (0.00s)
+    --- PASS: TestInvalidRequests/bad_patch_id (0.00s)
+    --- PASS: TestInvalidRequests/oversized (0.02s)
+=== RUN   TestMigrationIdempotent
+    notes_test.go:289: POST /api/v1/notes -> 201 Content-Type="application/json; charset=utf-8" {"id":1,"title":"Hello","content":"World","createdAt":"2026-10-13T23:16:18.152017+03:00","updatedAt":"2026-10-13T23:16:18.152017+03:00"}
+    notes_test.go:308: Migration repeated twice: existing row unchanged; CHECK and NOT NULL enforced
+--- PASS: TestMigrationIdempotent (0.04s)
+=== RUN   TestRepositoryCanceledContext
+--- PASS: TestRepositoryCanceledContext (0.03s)
+PASS
+ok  	github.com/Pondaaaaaa/GO/practices/pz16-integration/integration	1.848s

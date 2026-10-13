@@ -1,0 +1,4 @@
+go version go1.27.2 windows/amd64
+PowerShell 5.1.26100.9549
+Client 29.8.2; Engine 29.8.2
+Docker Compose version v5.5.1

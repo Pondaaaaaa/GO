@@ -1,0 +1,9 @@
+go fmt ./...
+exit=0
+go vet ./...
+exit=0
+go build ./...
+exit=0
+go mod verify
+all modules verified
+exit=0

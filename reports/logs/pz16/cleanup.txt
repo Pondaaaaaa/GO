@@ -1,0 +1,9 @@
+ Container pz16-a7722b52d5fc40328a5f6d374efcc493-pg-1 Stopping 
+ Container pz16-a7722b52d5fc40328a5f6d374efcc493-pg-1 Stopped 
+ Container pz16-a7722b52d5fc40328a5f6d374efcc493-pg-1 Removing 
+ Container pz16-a7722b52d5fc40328a5f6d374efcc493-pg-1 Removed 
+ Volume pz16-a7722b52d5fc40328a5f6d374efcc493_data Removing 
+ Network pz16-a7722b52d5fc40328a5f6d374efcc493_default Removing 
+ Volume pz16-a7722b52d5fc40328a5f6d374efcc493_data Removed 
+ Network pz16-a7722b52d5fc40328a5f6d374efcc493_default Removed 
+Verified: owned containers and volumes absent.

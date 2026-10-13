@@ -1,0 +1,1 @@
+ok  	github.com/Pondaaaaaa/GO/practices/pz16-integration/integration	2.651s

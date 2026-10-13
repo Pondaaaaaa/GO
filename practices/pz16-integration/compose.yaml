@@ -1,0 +1,18 @@
+services:
+  pg:
+    image: postgres:16.6-alpine
+    environment:
+      POSTGRES_USER: ${PZ16_USER:?set temporary user}
+      POSTGRES_PASSWORD: ${PZ16_PASSWORD:?set temporary password}
+      POSTGRES_DB: ${PZ16_DATABASE:?set temporary database}
+    ports:
+      - "127.0.0.1::5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 1s
+      timeout: 3s
+      retries: 60
+    volumes:
+      - data:/var/lib/postgresql/data
+volumes:
+  data:
