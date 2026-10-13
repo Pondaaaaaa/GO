@@ -1,0 +1,16 @@
+Go готов к работе: go version go1.27.2 windows/amd64
+API started on 127.0.0.1:49797
+GET /api/v1/notes -> 200 []
+POST /api/v1/notes -> 201 {"id":1,"title":"First note","content":"Test body","createdAt":"2026-10-13T16:00:52.69289Z"}
+GET /api/v1/notes -> 200 [{"id":1,"title":"First note","content":"Test body","createdAt":"2026-10-13T16:00:52.69289Z"}]
+GET /api/v1/notes/1 -> 200 {"id":1,"title":"First note","content":"Test body","createdAt":"2026-10-13T16:00:52.69289Z"}
+PATCH /api/v1/notes/1 -> 200 {"id":1,"title":"First note","content":"Changed body","createdAt":"2026-10-13T16:00:52.69289Z","updatedAt":"2026-10-13T16:00:52.838467Z"}
+POST /api/v1/notes -> 400 {"error":"invalid request"}
+GET /api/v1/notes/abc -> 400 {"error":"invalid request"}
+GET /api/v1/notes/99 -> 404 {"error":"note not found"}
+DELETE /api/v1/notes/1 -> 204
+GET /api/v1/notes/1 -> 404 {"error":"note not found"}
+GET /docs/index.html -> 200 (Swagger UI HTML)
+GET /docs/doc.json -> 200 (Swagger 2.0 JSON)
+Specification: Swagger 2.0, basePath /api/v1, all 5 operations, 204 without schema.
+PZ12 scenario passed.

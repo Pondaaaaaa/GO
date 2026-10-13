@@ -136,12 +136,17 @@ def add_picture(doc: Document, path: Path, caption: str) -> None:
     with Image.open(path) as image:
         width_px, height_px = image.size
     max_width, max_height = 17.2, 22.0
+    # Leave room for the tall Swagger UI screenshot and its caption in PZ12.
+    if path.parent.name == "pz12":
+        max_height = 19.5
     ratio = min(max_width / width_px, max_height / height_px)
     width = width_px * ratio
     paragraph = doc.add_paragraph()
     paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
     paragraph.paragraph_format.space_before = Pt(5)
     paragraph.paragraph_format.space_after = Pt(3)
+    if path.parent.name == "pz12" and caption:
+        paragraph.paragraph_format.keep_with_next = True
     paragraph.add_run().add_picture(str(path), width=Cm(width))
     if caption:
         text = doc.add_paragraph(caption)

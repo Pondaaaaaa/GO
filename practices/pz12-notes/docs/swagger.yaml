@@ -1,0 +1,218 @@
+basePath: /api/v1
+definitions:
+  core.ErrorResponse:
+    properties:
+      error:
+        description: Error is invalid request, note not found, or internal server
+          error.
+        type: string
+    required:
+    - error
+    type: object
+  core.Note:
+    properties:
+      content:
+        example: Test body
+        type: string
+      createdAt:
+        example: "2026-10-13T12:00:00Z"
+        type: string
+      id:
+        example: 1
+        type: integer
+      title:
+        example: First note
+        type: string
+      updatedAt:
+        example: "2026-10-13T12:01:00Z"
+        type: string
+    required:
+    - content
+    - createdAt
+    - id
+    - title
+    type: object
+  core.NoteCreate:
+    properties:
+      content:
+        example: Test body
+        type: string
+      title:
+        description: Title is trimmed and must contain a non-whitespace character.
+        example: First note
+        minLength: 1
+        type: string
+    required:
+    - title
+    type: object
+  core.NoteUpdate:
+    properties:
+      content:
+        example: Changed body
+        type: string
+      title:
+        example: Updated note
+        minLength: 1
+        type: string
+    type: object
+info:
+  contact: {}
+  description: In-memory notes CRUD. Code-first Swagger 2.0 documentation.
+  title: Notes API practice 12
+  version: 1.0.0
+paths:
+  /notes:
+    get:
+      description: All notes ordered by ascending ID; an empty repository returns
+        []. No filtering or pagination.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/core.Note'
+            type: array
+        "500":
+          description: Repository error
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+      summary: List notes
+      tags:
+      - notes
+    post:
+      consumes:
+      - application/json
+      description: JSON object up to 1 MiB. Title is trimmed and must not be blank.
+        Unknown fields are rejected.
+      parameters:
+      - description: New note
+        in: body
+        name: note
+        required: true
+        schema:
+          $ref: '#/definitions/core.NoteCreate'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          headers:
+            Location:
+              description: Relative URL of the created note
+              type: string
+          schema:
+            $ref: '#/definitions/core.Note'
+        "400":
+          description: Invalid JSON, content type or title
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+        "500":
+          description: Repository error
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+      summary: Create a note
+      tags:
+      - notes
+  /notes/{id}:
+    delete:
+      parameters:
+      - description: Positive note ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Deleted without response body
+        "400":
+          description: Invalid ID
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+        "404":
+          description: Note not found
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+        "500":
+          description: Repository error
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+      summary: Delete a note
+      tags:
+      - notes
+    get:
+      parameters:
+      - description: Positive note ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.Note'
+        "400":
+          description: Invalid ID
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+        "404":
+          description: Note not found
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+        "500":
+          description: Repository error
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+      summary: Get a note
+      tags:
+      - notes
+    patch:
+      consumes:
+      - application/json
+      description: At least one non-null title or content is required. Title must
+        not be blank; content may be empty. Unknown fields are rejected. JSON object
+        up to 1 MiB.
+      parameters:
+      - description: Positive note ID
+        in: path
+        minimum: 1
+        name: id
+        required: true
+        type: integer
+      - description: Fields to update
+        in: body
+        name: note
+        required: true
+        schema:
+          $ref: '#/definitions/core.NoteUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/core.Note'
+        "400":
+          description: Invalid ID or input
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+        "404":
+          description: Note not found
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+        "500":
+          description: Repository error
+          schema:
+            $ref: '#/definitions/core.ErrorResponse'
+      summary: Update a note
+      tags:
+      - notes
+swagger: "2.0"

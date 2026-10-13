@@ -1,0 +1,13 @@
+go fmt ./...
+go vet ./...
+go test ./...
+?   	github.com/Pondaaaaaa/GO/practices/pz12-notes/cmd/api	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz12-notes/docs	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz12-notes/internal/core	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz12-notes/internal/core/service	[no test files]
+ok  	github.com/Pondaaaaaa/GO/practices/pz12-notes/internal/http	1.054s
+?   	github.com/Pondaaaaaa/GO/practices/pz12-notes/internal/http/handlers	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz12-notes/internal/repo	[no test files]
+go build ./...
+go mod verify
+all modules verified

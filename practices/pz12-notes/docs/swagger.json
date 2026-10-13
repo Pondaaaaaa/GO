@@ -1,0 +1,315 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "In-memory notes CRUD. Code-first Swagger 2.0 documentation.",
+        "title": "Notes API practice 12",
+        "contact": {},
+        "version": "1.0.0"
+    },
+    "basePath": "/api/v1",
+    "paths": {
+        "/notes": {
+            "get": {
+                "description": "All notes ordered by ascending ID; an empty repository returns []. No filtering or pagination.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notes"
+                ],
+                "summary": "List notes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/core.Note"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Repository error",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "JSON object up to 1 MiB. Title is trimmed and must not be blank. Unknown fields are rejected.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notes"
+                ],
+                "summary": "Create a note",
+                "parameters": [
+                    {
+                        "description": "New note",
+                        "name": "note",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/core.NoteCreate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/core.Note"
+                        },
+                        "headers": {
+                            "Location": {
+                                "type": "string",
+                                "description": "Relative URL of the created note"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid JSON, content type or title",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Repository error",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/notes/{id}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notes"
+                ],
+                "summary": "Get a note",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Positive note ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/core.Note"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Note not found",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Repository error",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notes"
+                ],
+                "summary": "Delete a note",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Positive note ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted without response body"
+                    },
+                    "400": {
+                        "description": "Invalid ID",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Note not found",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Repository error",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "At least one non-null title or content is required. Title must not be blank; content may be empty. Unknown fields are rejected. JSON object up to 1 MiB.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "notes"
+                ],
+                "summary": "Update a note",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "Positive note ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Fields to update",
+                        "name": "note",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/core.NoteUpdate"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/core.Note"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID or input",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Note not found",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Repository error",
+                        "schema": {
+                            "$ref": "#/definitions/core.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "core.ErrorResponse": {
+            "type": "object",
+            "required": [
+                "error"
+            ],
+            "properties": {
+                "error": {
+                    "description": "Error is invalid request, note not found, or internal server error.",
+                    "type": "string"
+                }
+            }
+        },
+        "core.Note": {
+            "type": "object",
+            "required": [
+                "content",
+                "createdAt",
+                "id",
+                "title"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "example": "Test body"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "example": "2026-10-13T12:00:00Z"
+                },
+                "id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "title": {
+                    "type": "string",
+                    "example": "First note"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "example": "2026-10-13T12:01:00Z"
+                }
+            }
+        },
+        "core.NoteCreate": {
+            "type": "object",
+            "required": [
+                "title"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "example": "Test body"
+                },
+                "title": {
+                    "description": "Title is trimmed and must contain a non-whitespace character.",
+                    "type": "string",
+                    "minLength": 1,
+                    "example": "First note"
+                }
+            }
+        },
+        "core.NoteUpdate": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "example": "Changed body"
+                },
+                "title": {
+                    "type": "string",
+                    "minLength": 1,
+                    "example": "Updated note"
+                }
+            }
+        }
+    }
+}
