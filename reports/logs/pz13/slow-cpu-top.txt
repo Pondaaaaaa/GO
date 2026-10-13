@@ -1,0 +1,15 @@
+﻿File: slow.exe
+Build ID: <temporary-pz13-dir>\slow.exe2026-10-13 19:41:12.9681878 +0300 MSK
+Type: cpu
+Time: 2026-10-13 19:41:14 MSK
+Duration: 12s, Total samples = 3.72s (31.00%)
+Showing nodes accounting for 3.71s, 99.73% of 3.72s total
+Dropped 13 nodes (cum <= 0.02s)
+      flat  flat%   sum%        cum   cum%
+     3.71s 99.73% 99.73%      3.71s 99.73%  github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/work.Fib
+         0     0% 99.73%      3.72s   100%  github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/api.NewMux.func2
+         0     0% 99.73%      3.72s   100%  github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/api.NewMux.func2.1
+         0     0% 99.73%      3.72s   100%  net/http.(*ServeMux).ServeHTTP
+         0     0% 99.73%      3.72s   100%  net/http.(*conn).serve
+         0     0% 99.73%      3.72s   100%  net/http.HandlerFunc.ServeHTTP
+         0     0% 99.73%      3.72s   100%  net/http.serverHandler.ServeHTTP

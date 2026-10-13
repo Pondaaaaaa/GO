@@ -1,0 +1,13 @@
+﻿Total: 3.72s
+ROUTINE ======================== github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/work.Fib in D:\MAG\GO\practic\practices\pz13-pprof\internal\work\fib.go
+     3.71s      5.76s (flat, cum) 154.84% of Total
+     1.13s      1.13s      4:func Fib(n int) int {
+     220ms      220ms      5:	if n < 2 {
+     700ms      700ms      6:		return n
+         .          .      7:	}
+     1.66s      3.71s      8:	return Fib(n-1) + Fib(n-2)
+         .          .      9:}
+         .          .     10:
+         .          .     11:// FibFast computes the same value in O(n) time and O(1) space.
+         .          .     12:func FibFast(n int) int {
+         .          .     13:	if n < 2 {

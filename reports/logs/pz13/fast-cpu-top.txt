@@ -1,0 +1,16 @@
+﻿File: fast.exe
+Build ID: <temporary-pz13-dir>\fast.exe2026-10-13 19:41:30.0122672 +0300 MSK
+Type: cpu
+Time: 2026-10-13 19:41:31 MSK
+Duration: 12s, Total samples = 10ms (0.083%)
+Showing nodes accounting for 10ms, 100% of 10ms total
+      flat  flat%   sum%        cum   cum%
+      10ms   100%   100%       10ms   100%  net/textproto.validHeaderFieldByte (inline)
+         0     0%   100%       10ms   100%  bufio.(*Writer).Flush
+         0     0%   100%       10ms   100%  net/http.(*chunkWriter).Write
+         0     0%   100%       10ms   100%  net/http.(*chunkWriter).writeHeader
+         0     0%   100%       10ms   100%  net/http.(*conn).serve
+         0     0%   100%       10ms   100%  net/http.(*response).finishRequest
+         0     0%   100%       10ms   100%  net/http.Header.Get (inline)
+         0     0%   100%       10ms   100%  net/textproto.CanonicalMIMEHeaderKey
+         0     0%   100%       10ms   100%  net/textproto.MIMEHeader.Get

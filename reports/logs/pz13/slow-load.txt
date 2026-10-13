@@ -1,0 +1,1 @@
+﻿requests=24 concurrency=1 interval=500ms target_rps=2.0 elapsed=11.6806733s mean_http=167.991ms max_http=181.3562ms late_arrivals=0 result=39088169

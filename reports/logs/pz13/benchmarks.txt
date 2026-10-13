@@ -1,0 +1,22 @@
+﻿?   	github.com/Pondaaaaaa/GO/practices/pz13-pprof/cmd/api	[no test files]
+?   	github.com/Pondaaaaaa/GO/practices/pz13-pprof/cmd/load	[no test files]
+2026/10/13 19:41:46 slow(10) took 0s
+2026/10/13 19:41:46 fast(10) took 0s
+2026/10/13 19:41:46 slow(10) took 0s
+2026/10/13 19:41:46 fast(10) took 0s
+2026/10/13 19:41:46 slow(10) took 0s
+2026/10/13 19:41:46 fast(10) took 0s
+PASS
+ok  	github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/api	0.510s
+goos: windows
+goarch: amd64
+pkg: github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/work
+cpu: Intel(R) Core(TM) i9-14900KF
+BenchmarkFib     	     406	   3096615 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFib     	     375	   3342112 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFib     	     314	   3897111 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibFast 	100000000	        11.06 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibFast 	100000000	        11.27 ns/op	       0 B/op	       0 allocs/op
+BenchmarkFibFast 	100000000	        11.07 ns/op	       0 B/op	       0 allocs/op
+PASS
+ok  	github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/work	8.479s

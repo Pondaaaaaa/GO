@@ -1,0 +1,11 @@
+﻿File: slow.exe
+Build ID: <temporary-pz13-dir>\slow.exe2026-10-13 19:41:12.9681878 +0300 MSK
+Type: inuse_space
+Time: 2026-10-13 19:41:26 MSK
+Showing nodes accounting for 4MB, 100% of 4MB total
+      flat  flat%   sum%        cum   cum%
+       4MB   100%   100%        4MB   100%  github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/api.(*HeapLab).Allocate
+         0     0%   100%        4MB   100%  net/http.(*ServeMux).ServeHTTP
+         0     0%   100%        4MB   100%  net/http.(*conn).serve
+         0     0%   100%        4MB   100%  net/http.HandlerFunc.ServeHTTP
+         0     0%   100%        4MB   100%  net/http.serverHandler.ServeHTTP

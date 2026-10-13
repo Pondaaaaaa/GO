@@ -1,0 +1,13 @@
+﻿File: fast.exe
+Build ID: <temporary-pz13-dir>\fast.exe2026-10-13 19:41:30.0122672 +0300 MSK
+Type: alloc_space
+Time: 2026-10-13 19:41:43 MSK
+Showing nodes accounting for 5.16MB, 100% of 5.16MB total
+      flat  flat%   sum%        cum   cum%
+       4MB 77.58% 77.58%        4MB 77.58%  github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/api.(*HeapLab).Allocate
+    1.16MB 22.42%   100%     1.16MB 22.42%  runtime/pprof.StartCPUProfile
+         0     0%   100%     5.16MB   100%  net/http.(*ServeMux).ServeHTTP
+         0     0%   100%     5.16MB   100%  net/http.(*conn).serve
+         0     0%   100%     5.16MB   100%  net/http.HandlerFunc.ServeHTTP
+         0     0%   100%     5.16MB   100%  net/http.serverHandler.ServeHTTP
+         0     0%   100%     1.16MB 22.42%  net/http/pprof.Profile

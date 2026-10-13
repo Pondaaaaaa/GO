@@ -1,0 +1,25 @@
+﻿File: slow.exe
+Build ID: <temporary-pz13-dir>\slow.exe2026-10-13 19:41:12.9681878 +0300 MSK
+Type: alloc_space
+Time: 2026-10-13 19:41:26 MSK
+Showing nodes accounting for 6376.68kB, 100% of 6376.68kB total
+      flat  flat%   sum%        cum   cum%
+ 4097.37kB 64.26% 64.26%  4097.37kB 64.26%  github.com/Pondaaaaaa/GO/practices/pz13-pprof/internal/api.(*HeapLab).Allocate
+ 1184.27kB 18.57% 82.83%  1184.27kB 18.57%  runtime/pprof.StartCPUProfile
+  583.01kB  9.14% 91.97%   583.01kB  9.14%  compress/flate.newFastEnc (inline)
+  512.02kB  8.03%   100%   512.02kB  8.03%  net/textproto.readMIMEHeader
+         0     0%   100%   583.01kB  9.14%  compress/flate.(*compressor).init
+         0     0%   100%   583.01kB  9.14%  compress/flate.NewWriter (inline)
+         0     0%   100%   583.01kB  9.14%  compress/gzip.(*Writer).Write
+         0     0%   100%  5281.65kB 82.83%  net/http.(*ServeMux).ServeHTTP
+         0     0%   100%   512.02kB  8.03%  net/http.(*conn).readRequest
+         0     0%   100%  5793.67kB 90.86%  net/http.(*conn).serve
+         0     0%   100%  5281.65kB 82.83%  net/http.HandlerFunc.ServeHTTP
+         0     0%   100%   512.02kB  8.03%  net/http.readRequestLimit
+         0     0%   100%  5281.65kB 82.83%  net/http.serverHandler.ServeHTTP
+         0     0%   100%  1184.27kB 18.57%  net/http/pprof.Profile
+         0     0%   100%   583.01kB  9.14%  runtime/pprof.(*profileBuilder).appendLocsForStack
+         0     0%   100%   583.01kB  9.14%  runtime/pprof.(*profileBuilder).build
+         0     0%   100%   583.01kB  9.14%  runtime/pprof.(*profileBuilder).emitLocation
+         0     0%   100%   583.01kB  9.14%  runtime/pprof.(*profileBuilder).flush
+         0     0%   100%   583.01kB  9.14%  runtime/pprof.profileWriter
