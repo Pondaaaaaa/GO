@@ -228,6 +228,8 @@ def convert(markdown: Path) -> Path:
         if heading:
             level = len(heading.group(1))
             title = heading.group(2).replace(" — ", " ") if level == 1 else heading.group(2)
+            if markdown.stem == "pz10" and title == "Краткое описание":
+                doc.add_page_break()
             p = doc.add_paragraph(style="Title" if level == 1 else f"Heading {min(level - 1, 3)}")
             add_inline(p, title, markdown)
             index += 1

@@ -1,0 +1,20 @@
+Go готов к работе: go version go1.27.2 windows/amd64
+Go: go version go1.27.2 windows/amd64
+API ready at http://127.0.0.1:52495
+POST /api/v1/login admin -> 200
+admin: access and refresh tokens issued (values hidden)
+GET /api/v1/me admin -> 200
+{"id":1,"email":"admin@example.com","role":"admin"}
+GET /api/v1/admin/stats admin -> 200
+{"users":2,"version":"1.0"}
+POST /api/v1/login user -> 200
+GET /api/v1/admin/stats user -> 403
+GET /api/v1/users/2 user -> 200
+GET /api/v1/users/1 user -> 403
+GET /api/v1/me without token -> 401
+POST /api/v1/refresh -> 200
+old/new access tokens differ (values hidden)
+GET /api/v1/me with old access -> 200
+GET /api/v1/me with new access -> 200
+POST /api/v1/refresh replay -> 401
+PZ10 scenario passed.
