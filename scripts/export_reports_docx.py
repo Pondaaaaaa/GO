@@ -201,7 +201,7 @@ def add_code_line(doc: Document, line: str, compact: bool = False, keep_with_nex
 
 def convert(markdown: Path) -> Path:
     doc = prepare_document()
-    if markdown.stem == "pz05":
+    if markdown.stem in {"pz05", "pz09"}:
         normal = doc.styles["Normal"]
         normal.font.size = Pt(10)
         normal.paragraph_format.space_after = Pt(4)
