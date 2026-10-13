@@ -1,0 +1,3 @@
+ok  	github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/mathx	(cached)
+ok  	github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/service	(cached)
+ok  	github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/stringsx	(cached)

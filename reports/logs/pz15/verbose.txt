@@ -1,0 +1,76 @@
+=== RUN   TestSum_Table
+=== RUN   TestSum_Table/positive
+=== RUN   TestSum_Table/mixed_signs
+=== RUN   TestSum_Table/both_negative
+=== RUN   TestSum_Table/both_zero
+=== RUN   TestSum_Table/zero_identity
+=== RUN   TestSum_Table/cancellation
+--- PASS: TestSum_Table (0.00s)
+    --- PASS: TestSum_Table/positive (0.00s)
+    --- PASS: TestSum_Table/mixed_signs (0.00s)
+    --- PASS: TestSum_Table/both_negative (0.00s)
+    --- PASS: TestSum_Table/both_zero (0.00s)
+    --- PASS: TestSum_Table/zero_identity (0.00s)
+    --- PASS: TestSum_Table/cancellation (0.00s)
+=== RUN   TestDivide_OkAndError
+=== RUN   TestDivide_OkAndError/exact
+=== RUN   TestDivide_OkAndError/remainder
+=== RUN   TestDivide_OkAndError/negative_numerator
+=== RUN   TestDivide_OkAndError/negative_denominator
+=== RUN   TestDivide_OkAndError/both_negative
+=== RUN   TestDivide_OkAndError/zero_numerator
+=== RUN   TestDivide_OkAndError/zero_denominator
+=== RUN   TestDivide_OkAndError/zero_by_zero
+--- PASS: TestDivide_OkAndError (0.00s)
+    --- PASS: TestDivide_OkAndError/exact (0.00s)
+    --- PASS: TestDivide_OkAndError/remainder (0.00s)
+    --- PASS: TestDivide_OkAndError/negative_numerator (0.00s)
+    --- PASS: TestDivide_OkAndError/negative_denominator (0.00s)
+    --- PASS: TestDivide_OkAndError/both_negative (0.00s)
+    --- PASS: TestDivide_OkAndError/zero_numerator (0.00s)
+    --- PASS: TestDivide_OkAndError/zero_denominator (0.00s)
+    --- PASS: TestDivide_OkAndError/zero_by_zero (0.00s)
+PASS
+ok  	github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/mathx	0.406s
+=== RUN   TestService_FindIDByEmail
+=== RUN   TestService_FindIDByEmail/found
+=== RUN   TestService_FindIDByEmail/not_found
+=== RUN   TestService_FindIDByEmail/empty_email_forwarded
+=== RUN   TestService_FindIDByEmail/repository_error
+=== RUN   TestService_FindIDByEmail/wrapped_not_found
+--- PASS: TestService_FindIDByEmail (0.00s)
+    --- PASS: TestService_FindIDByEmail/found (0.00s)
+    --- PASS: TestService_FindIDByEmail/not_found (0.00s)
+    --- PASS: TestService_FindIDByEmail/empty_email_forwarded (0.00s)
+    --- PASS: TestService_FindIDByEmail/repository_error (0.00s)
+    --- PASS: TestService_FindIDByEmail/wrapped_not_found (0.00s)
+PASS
+ok  	github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/service	0.409s
+=== RUN   TestClip
+=== RUN   TestClip/empty
+=== RUN   TestClip/empty_zero
+=== RUN   TestClip/empty_negative
+=== RUN   TestClip/zero
+=== RUN   TestClip/negative
+=== RUN   TestClip/equal_length
+=== RUN   TestClip/larger_limit
+=== RUN   TestClip/truncate
+=== RUN   TestClip/first_byte
+=== RUN   TestClip/unicode_whole_rune
+=== RUN   TestClip/unicode_split
+=== RUN   TestClip/split_utf8_is_documented
+--- PASS: TestClip (0.00s)
+    --- PASS: TestClip/empty (0.00s)
+    --- PASS: TestClip/empty_zero (0.00s)
+    --- PASS: TestClip/empty_negative (0.00s)
+    --- PASS: TestClip/zero (0.00s)
+    --- PASS: TestClip/negative (0.00s)
+    --- PASS: TestClip/equal_length (0.00s)
+    --- PASS: TestClip/larger_limit (0.00s)
+    --- PASS: TestClip/truncate (0.00s)
+    --- PASS: TestClip/first_byte (0.00s)
+    --- PASS: TestClip/unicode_whole_rune (0.00s)
+    --- PASS: TestClip/unicode_split (0.00s)
+    --- PASS: TestClip/split_utf8_is_documented (0.00s)
+PASS
+ok  	github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/stringsx	0.425s

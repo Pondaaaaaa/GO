@@ -1,0 +1,6 @@
+github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/mathx/mathx.go:5:	Sum		100.0%
+github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/mathx/mathx.go:8:	Divide		100.0%
+github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/service/service.go:5:	New		100.0%
+github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/service/service.go:8:	FindIDByEmail	100.0%
+github.com/Pondaaaaaa/GO/practices/pz15-tests/internal/stringsx/stringsx.go:5:	Clip		100.0%
+total:										(statements)	100.0%
