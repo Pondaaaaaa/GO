@@ -1,0 +1,17 @@
+Go готов к работе: go version go1.27.2 windows/amd64
+Building PZ08 API...
+Starting owned Compose project pz08mongo77dd2626b954 with MongoDB on a free local port...
+GET /health -> 200 {"status":"ok"}
+POST /api/v1/notes -> 201 {"id":"6acd89516d9d84687ab5c5fc","title":"PZ08 77dd2626b954 A","content":"first content","createdAt":"2026-10-13T01:28:49.307299Z","updatedAt":"2026-10-13T01:28:49.307299Z"}
+POST /api/v1/notes (second note) -> 201 {"id":"6acd89516d9d84687ab5c5fd","title":"PZ08 77dd2626b954 [B]","content":"second content","createdAt":"2026-10-13T01:28:49.3297808Z","updatedAt":"2026-10-13T01:28:49.3297808Z"}
+GET /api/v1/notes?q=...&limit=1&skip=1 -> 200 {"items":[{"id":"6acd89516d9d84687ab5c5fc","title":"PZ08 77dd2626b954 A","content":"first content","createdAt":"2026-10-13T01:28:49.307Z","updatedAt":"2026-10-13T01:28:49.307Z"}],"limit":1,"skip":1}
+GET /api/v1/notes?q=%5B -> 200 {"items":[{"id":"6acd89516d9d84687ab5c5fd","title":"PZ08 77dd2626b954 [B]","content":"second content","createdAt":"2026-10-13T01:28:49.329Z","updatedAt":"2026-10-13T01:28:49.329Z"}],"limit":10,"skip":0}
+GET /api/v1/notes/{id} -> 200 {"id":"6acd89516d9d84687ab5c5fc","title":"PZ08 77dd2626b954 A","content":"first content","createdAt":"2026-10-13T01:28:49.307Z","updatedAt":"2026-10-13T01:28:49.307Z"}
+PATCH /api/v1/notes/{id} -> 200 {"id":"6acd89516d9d84687ab5c5fc","title":"PZ08 77dd2626b954 A","content":"updated content","createdAt":"2026-10-13T01:28:49.307Z","updatedAt":"2026-10-13T01:28:49.343Z"}
+POST duplicate title -> 409 {"error":"title already exists"}
+PATCH duplicate title -> 409 {"error":"title already exists"}
+GET invalid ObjectID -> 400 {"error":"invalid note id"}
+GET missing note -> 404 {"error":"note not found"}
+DELETE /api/v1/notes/{id} -> 204 body-length=0
+GET deleted note -> 404 {"error":"note not found"}
+Scenario passed: five CRUD operations, filter, pagination, duplicates, ObjectID errors, 404 and empty 204.
