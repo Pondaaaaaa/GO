@@ -1,0 +1,76 @@
+﻿PLAN baseline OFFSET 80000
+SQL: SELECT id,title,content,created_at,updated_at FROM pz14_94cdcd550e994030bb953856ca1b1079_base.notes ORDER BY created_at DESC,id DESC OFFSET $1 LIMIT $2
+Limit  (cost=21780.32..21780.45 rows=50 width=198) (actual time=49.726..49.732 rows=50.00 loops=1)
+  Buffers: shared hit=2709, temp read=2071 written=2482
+  ->  Sort  (cost=21580.32..21830.32 rows=100000 width=198) (actual time=38.823..48.215 rows=80050.00 loops=1)
+        Sort Key: created_at DESC, id DESC
+        Sort Method: external merge  Disk: 19800kB
+        Buffers: shared hit=2709, temp read=2071 written=2482
+        ->  Seq Scan on notes  (cost=0.00..3703.00 rows=100000 width=198) (actual time=0.016..10.378 rows=100000.00 loops=1)
+              Buffers: shared hit=2703
+Planning:
+  Buffers: shared hit=90
+Planning Time: 1.761 ms
+Execution Time: 59.004 ms
+PLAN base full-text redis
+SQL: SELECT id,title FROM pz14_94cdcd550e994030bb953856ca1b1079_base.notes WHERE to_tsvector('simple',title) @@ plainto_tsquery('simple',$1)
+Gather  (cost=1000.00..19194.18 rows=500 width=18) (actual time=1.131..52.199 rows=100.00 loops=1)
+  Workers Planned: 1
+  Workers Launched: 1
+  Buffers: shared hit=2796
+  ->  Parallel Seq Scan on notes  (cost=0.00..18144.18 rows=294 width=18) (actual time=0.566..33.000 rows=50.00 loops=2)
+        Filter: (to_tsvector('simple'::regconfig, title) @@ '''redis'''::tsquery)
+        Rows Removed by Filter: 49950
+        Buffers: shared hit=2796
+Planning:
+  Buffers: shared hit=16
+Planning Time: 0.237 ms
+Execution Time: 52.231 ms
+PLAN N+1 representative point query, repeated 20 times by API
+SQL: SELECT id,title,content,created_at,updated_at FROM pz14_94cdcd550e994030bb953856ca1b1079_base.notes WHERE id=$1
+Index Scan using notes_pkey on notes  (cost=0.29..8.31 rows=1 width=198) (actual time=0.017..0.018 rows=1.00 loops=1)
+  Index Cond: (id = '1'::bigint)
+  Index Searches: 1
+  Buffers: shared hit=3
+Planning Time: 0.085 ms
+Execution Time: 0.030 ms
+PLAN optimized keyset
+SQL: SELECT id,title,content,created_at,updated_at FROM pz14_94cdcd550e994030bb953856ca1b1079_opt.notes WHERE (created_at,id)<($1,$2) ORDER BY created_at DESC,id DESC LIMIT $3
+Limit  (cost=0.42..14.73 rows=50 width=198) (actual time=0.021..0.029 rows=50.00 loops=1)
+  Buffers: shared hit=5
+  ->  Index Scan using notes_created_id on notes  (cost=0.42..5695.19 rows=19898 width=198) (actual time=0.020..0.026 rows=50.00 loops=1)
+        Index Cond: (ROW(created_at, id) < ROW('2026-01-01 08:33:21+03'::timestamp with time zone, '20001'::bigint))
+        Index Searches: 1
+        Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=68
+Planning Time: 1.749 ms
+Execution Time: 0.046 ms
+PLAN opt full-text redis
+SQL: SELECT id,title FROM pz14_94cdcd550e994030bb953856ca1b1079_opt.notes WHERE to_tsvector('simple',title) @@ plainto_tsquery('simple',$1)
+Bitmap Heap Scan on notes  (cost=21.90..407.90 rows=107 width=18) (actual time=0.058..0.352 rows=100.00 loops=1)
+  Recheck Cond: (to_tsvector('simple'::regconfig, title) @@ '''redis'''::tsquery)
+  Heap Blocks: exact=100
+  Buffers: shared hit=105
+  ->  Bitmap Index Scan on notes_title_fts  (cost=0.00..21.87 rows=107 width=0) (actual time=0.040..0.040 rows=100.00 loops=1)
+        Index Cond: (to_tsvector('simple'::regconfig, title) @@ '''redis'''::tsquery)
+        Index Searches: 1
+        Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=10
+Planning Time: 0.079 ms
+Execution Time: 0.371 ms
+PLAN batch 20 IDs
+SQL: SELECT id,title,content,created_at,updated_at FROM pz14_94cdcd550e994030bb953856ca1b1079_opt.notes WHERE id=ANY($1::bigint[]) ORDER BY array_position($1::bigint[],id)
+Sort  (cost=90.68..90.73 rows=20 width=202) (actual time=0.034..0.034 rows=20.00 loops=1)
+  Sort Key: (array_position('{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}'::bigint[], id))
+  Sort Method: quicksort  Memory: 29kB
+  Buffers: shared hit=6
+  ->  Index Scan using notes_pkey on notes  (cost=0.29..90.25 rows=20 width=202) (actual time=0.018..0.023 rows=20.00 loops=1)
+        Index Cond: (id = ANY ('{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20}'::bigint[]))
+        Index Searches: 1
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=12
+Planning Time: 0.065 ms
+Execution Time: 0.047 ms

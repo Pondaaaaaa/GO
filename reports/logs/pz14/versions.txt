@@ -1,0 +1,6 @@
+﻿go version go1.27.2 windows/amd64
+psql (PostgreSQL) 18.6
+PowerShell 5.1.26100.9549
+driver pgx/v5 v5.7.2
+run_id=94cdcd550e994030bb953856ca1b1079
+Data: 100000 rows per schema; no DROP/TRUNCATE; 200 requests per scenario, concurrency 8, warmup 10; pools 1 and 8

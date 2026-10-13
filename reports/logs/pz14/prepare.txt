@@ -1,0 +1,4 @@
+﻿PostgreSQL server_version=18.6
+base: 100000 deterministic rows, primary key only
+opt: 100000 deterministic rows, primary key plus created/id and full-text indexes
+pg_stat_statements unavailable: absent from shared_preload_libraries; global configuration unchanged.

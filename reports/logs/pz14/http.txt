@@ -1,0 +1,12 @@
+GET /health -> 200 {"ok":true}
+GET /health -> 200 {"ok":true}
+GET /health -> 200 {"ok":true}
+GET /health -> 200 {"ok":true}
+POST /api/v1/notes -> 201 {"id":100004,"title":"HTTP probe","content":"test","createdAt":"2026-10-13T21:37:24.674735+03:00"}
+GET /api/v1/notes/100004 -> 200 {"id":100004,"title":"HTTP probe","content":"test","createdAt":"2026-10-13T21:37:24.674735+03:00"}
+PATCH /api/v1/notes/100004 -> 200 {"id":100004,"title":"HTTP probe","content":"changed","createdAt":"2026-10-13T21:37:24.674735+03:00","updatedAt":"2026-10-13T21:37:24.776149+03:00"}
+DELETE /api/v1/notes/100004 -> 204
+GET /api/v1/notes/100004 -> 404 {"error":"note not found"}
+POST /api/v1/notes -> 400 {"error":"invalid request"}
+GET /api/v1/notes/abc -> 400 {"error":"invalid request"}
+POST /api/v1/notes/many -> 400 {"error":"invalid request"}

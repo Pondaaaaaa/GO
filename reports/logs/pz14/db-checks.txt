@@ -1,0 +1,5 @@
+﻿OFFSET/keyset: same 50 rows at logical offset 80000
+N+1/batch: same 20 rows in requested order
+keyset walk: 300 consecutive rows, no missing IDs or duplicates
+transaction rollback: first insert absent after invalid second item
+transaction commit: two notes and two matching audit entries
