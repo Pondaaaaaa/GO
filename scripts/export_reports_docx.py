@@ -7,6 +7,7 @@ Run with a Python environment containing python-docx and Pillow:
 from __future__ import annotations
 
 import re
+import sys
 from pathlib import Path
 from urllib.parse import urljoin
 
@@ -189,9 +190,10 @@ def add_table(doc: Document, lines: list[str], markdown: Path) -> None:
     doc.add_paragraph().paragraph_format.space_after = Pt(0)
 
 
-def add_code_line(doc: Document, line: str, compact: bool = False) -> None:
+def add_code_line(doc: Document, line: str, compact: bool = False, keep_with_next: bool = False) -> None:
     p = doc.add_paragraph(style="Code")
     run = p.add_run(line if line else " ")
+    p.paragraph_format.keep_with_next = keep_with_next
     if compact:
         run.font.size = Pt(7.5)
         p.paragraph_format.line_spacing = 0.9
@@ -215,7 +217,8 @@ def convert(markdown: Path) -> Path:
             index += 1
             continue
         if in_code:
-            add_code_line(doc, line)
+            keep_with_next = index + 1 < len(lines) and not lines[index + 1].startswith("```")
+            add_code_line(doc, line, keep_with_next=keep_with_next)
             index += 1
             continue
         if not line.strip():
@@ -255,7 +258,7 @@ def convert(markdown: Path) -> Path:
         next_index = index + 1
         while next_index < len(lines) and not lines[next_index].strip():
             next_index += 1
-        if next_index < len(lines) and lines[next_index].lstrip().startswith("!["):
+        if next_index < len(lines) and lines[next_index].lstrip().startswith(("![", "```")):
             p.paragraph_format.keep_with_next = True
         for image_link in IMAGE_LINK.finditer(content):
             path = (markdown.parent / image_link.group(2)).resolve()
@@ -278,10 +281,12 @@ def convert(markdown: Path) -> Path:
 
 
 def main() -> None:
-    paths = sorted(REPORTS.glob("pz[0-9][0-9].md"))
+    paths = [REPORTS / f"{stem}.md" for stem in sys.argv[1:]] if len(sys.argv) > 1 else sorted(REPORTS.glob("pz[0-9][0-9].md"))
     if not paths:
         raise SystemExit("No practice reports found")
     for markdown in paths:
+        if not re.fullmatch(r"pz[0-9][0-9]\.md", markdown.name) or not markdown.is_file():
+            raise SystemExit(f"Invalid report: {markdown}")
         print(convert(markdown))
 
 
