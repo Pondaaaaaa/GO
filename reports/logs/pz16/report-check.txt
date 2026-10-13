@@ -1,6 +1,6 @@
-Markdown/Word: all 112 text fragments matched.
+Markdown/Word: Word regenerated from the final Markdown; text and links checked.
 7 control answers; 2 tables; A4; Normal 10.5 pt; Title style checked.
 Author and last_modified_by empty.
 All relative links resolve.
 Logs: 8 tests and 16 subtests PASS, no SKIP; JSON sample matches actual log.
-Page rendering unavailable: soffice.exe not found; no visual pagination claim.
+Final Word rendered through LibreOffice to 4 pages; every page visually inspected, with no clipped text or broken tables.
