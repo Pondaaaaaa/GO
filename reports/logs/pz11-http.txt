@@ -1,0 +1,13 @@
+Go готов к работе: go version go1.27.2 windows/amd64
+API started on 127.0.0.1:62187
+GET /api/v1/notes -> 200 []
+POST /api/v1/notes -> 201 {"id":1,"title":"First note","content":"Test body","createdAt":"2026-10-13T15:35:01.1263085Z"}
+GET /api/v1/notes -> 200 [{"id":1,"title":"First note","content":"Test body","createdAt":"2026-10-13T15:35:01.1263085Z"}]
+GET /api/v1/notes/1 -> 200 {"id":1,"title":"First note","content":"Test body","createdAt":"2026-10-13T15:35:01.1263085Z"}
+PATCH /api/v1/notes/1 -> 200 {"id":1,"title":"First note","content":"Changed body","createdAt":"2026-10-13T15:35:01.1263085Z","updatedAt":"2026-10-13T15:35:01.2295589Z"}
+POST /api/v1/notes -> 400 {"error":"invalid request"}
+GET /api/v1/notes/abc -> 400 {"error":"invalid request"}
+GET /api/v1/notes/99 -> 404 {"error":"note not found"}
+DELETE /api/v1/notes/1 -> 204
+GET /api/v1/notes/1 -> 404 {"error":"note not found"}
+PZ11 scenario passed.
